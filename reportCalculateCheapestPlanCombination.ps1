@@ -27,7 +27,7 @@ if (!$ErrorOccured) {
 
 # Work
 
-$licensingServicePlanReference = Import-Csv -path .\licensing-service-plan-reference.csv
+$licensingServicePlanReference = Import-Csv -path .\licensing-service-plan-reference-modifed.csv
 
 $prices = Import-Excel -Path .\ms365prices.xlsx
 
@@ -87,7 +87,7 @@ $ExchangeAny = $true # Yes, No
 $ExchangeOnlinePlan1 = $false # Yes, No
 $ExchangeOnlinePlan2 = $false # Yes, No
 $aadP1 = $true # Yes, No
-$office365ATP = $true # Yes, No
+$office365ATP = $false # Yes, No
 
 # Work
 
