@@ -67,9 +67,10 @@ $groupsPieces = @{
 
 $groupsSkus = @{
 	'group1' = ("Microsoft 365 E3","Office 365 Advanced Threat Protection (Plan 1)")
-	'group2' = ("EXCHANGE ONLINE (PLAN 1)","Office 365 Advanced Threat Protection (Plan 1)","EXCHANGE ONLINE ARCHIVING FOR EXCHANGE ONLINE","AZURE ACTIVE DIRECTORY PREMIUM P1")
+	'group2' = ("EXCHANGE ONLINE (PLAN 1)","Office 365 Advanced Threat Protection (Plan 1)","EXCHANGE ONLINE ARCHIVING FOR EXCHANGE ONLINE")
 }
 
+#,"AZURE ACTIVE DIRECTORY PREMIUM P1"
 #
 
 $groupsData = @()
@@ -105,10 +106,14 @@ foreach ($group in $groupsPieces.keys) {
 }
 $groupsData | ft
 
+$groupsComplianceData = @()
+
 # Checking groups
 
 Foreach ($groupData in $groupsData) {
-    Write-Host $groupData.groupName
+    #Write-Host $groupData.groupName
+    $complaintServices = @()
+    $notcomplaintServices = @()
 
     Foreach ($serviceEnabled in $servicesEnabled) {
         $serviceComplaint = $false
@@ -122,11 +127,50 @@ Foreach ($groupData in $groupsData) {
         }
 
         if ($serviceComplaint) {
-            Write-Host $serviceEnabled" is complaint"
+            $serviceEnabledString = $serviceEnabled
+            #Write-Host $serviceEnabled" is complaint"
+            $complaintServices += $serviceEnabledString
         } else {
-            Write-Host $serviceEnabled" is not complaint"
+            $serviceEnabledString = $serviceEnabled
+            #Write-Host $serviceEnabled" is not complaint"
+            $notcomplaintServices += $serviceEnabledString
         }
     }
+
+    $groupComplianceDetails = [PSCustomObject]@{
+        groupName = $groupData.groupName
+        complaint = $complaintServices
+        notcomplaint = $notcomplaintServices
+    }
+
+    $groupsComplianceData += $groupComplianceDetails
 }
 
+$groupsComplianceData | ConvertTo-Json
 
+
+<#
+
+
+
+{
+    "groupName": "group1",
+    "complaint": [
+        { 
+            "name": "dataLossPrevention"
+        },
+        { 
+            "name": "legaleDiscoveryHold" 
+        }
+    ],
+    "notcomplaint": [
+        { 
+            "name": "dataLossPrevention"
+        },
+        { 
+            "name": "legaleDiscoveryHold" 
+        }
+    ]
+},
+
+#>
