@@ -75,19 +75,20 @@ ForEach ($productFound in $productsFound) {
 
 }
 
-
 # whatDoYouWant - Variables
 
 $pieces = 2000
 $microsoft365AppsForAny = $true # Yes, No
 $microsoft365AppsForBusiness = $false # Yes, No
 $microsoft365AppsForEnterprise = $false # Yes, No
+$microsoft365AppsSharedComputerActivation = $false # hvordan skal dette implemteres?
 $intune = $true # Yes, No
 $ExchangeAny = $true # Yes, No
 $ExchangeOnlinePlan1 = $false # Yes, No
 $ExchangeOnlinePlan2 = $false # Yes, No
 $aadP1 = $true # Yes, No
-$office365ATP = $false # Yes, No
+$aipP1 = $false
+$office365AtpP1 = $false # Yes, No
 
 # Work
 
@@ -98,11 +99,12 @@ $whatDoYouWant = @{
     'microsoft365AppsForBusiness' = $microsoft365AppsForBusiness
     'microsoft365AppsForEnterprise' = $microsoft365AppsForEnterprise
     'intune' = $intune
-    'ExchangeAny' = $ExchangeAny
-    'ExchangeOnlinePlan1' = $ExchangeOnlinePlan1
-    'ExchangeOnlinePlan2' = $ExchangeOnlinePlan2
+    'exchangeAny' = $exchangeAny
+    'exchangeOnlinePlan1' = $exchangeOnlinePlan1
+    'exchangeOnlinePlan2' = $exchangeOnlinePlan2
     'aadP1' = $aadP1
-    'office365ATP' = $office365ATP
+    'office365AtpP1' = $office365AtpP1
+    '$aipP1' = $aipP1
 }
 
 # Creating Key Value Pair for service and servicesku matching
@@ -112,11 +114,12 @@ $servicesMatching = @{
     'microsoft365AppsForAny' = ("OFFICE_BUSINESS","OFFICESUBSCRIPTION")
     'microsoft365AppsForBusiness' = ("OFFICE_BUSINESS")
     'microsoft365AppsForEnterprise' = ("OFFICESUBSCRIPTION")
-    'ExchangeAny' = ("EXCHANGE_S_STANDARD","EXCHANGE_S_ENTERPRISE")
-    'ExchangeOnlinePlan1' = ("EXCHANGE_S_STANDARD")
-    'ExchangeOnlinePlan2' = ("EXCHANGE_S_ENTERPRISE")
+    'exchangeAny' = ("EXCHANGE_S_STANDARD","EXCHANGE_S_ENTERPRISE")
+    'exchangeOnlinePlan1' = ("EXCHANGE_S_STANDARD")
+    'exchangeOnlinePlan2' = ("EXCHANGE_S_ENTERPRISE")
     'aadP1' = ("AAD_PREMIUM","AAD_SMB")
-    'office365ATP' = ("ATP_ENTERPRISE")
+    'office365AtpP1' = ("ATP_ENTERPRISE")
+    'aipP1' = ("RMS_S_PREMIUM")
 }
 
 # Creating Key Value Pair for produkt user limitations
