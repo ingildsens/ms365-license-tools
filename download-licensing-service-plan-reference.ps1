@@ -41,8 +41,25 @@ $ServiceplansincludedFriendlyNames = ([Environment]::NewLine) + "Office 365 Adva
 ($htmlTable | Where-Object {$_.Productname -eq "Microsoft 365 Business Premium"}).Serviceplansincluded += $Serviceplansincluded
 ($htmlTable | Where-Object {$_.Productname -eq "Microsoft 365 Business Premium"})."Serviceplansincluded(friendlynames)" += $ServiceplansincludedFriendlyNames
 
+# 2. https://docs.microsoft.com/en-us/deployoffice/overview-shared-computer-activation#how-to-enable-shared-computer-activation-for-microsoft-365-apps
+# Microsoft 365 Apps for Business with (Shared computer activation) included in Microsoft 365 Business Premium.
+
+$serviceplansincludedReplace = "OFFICE_BUSINESS (094e7854-93fc-4d55-b2c0-3ab5369ebdc1)"
+$serviceplansincludedReplaceWith = "OFFICE_BUS_SCA (Custom-001)"
+
+$SPB02serviceplansincluded = ($htmlTable | Where-Object {$_.Productname -eq "Microsoft 365 Business Premium"}).Serviceplansincluded
+($htmlTable | Where-Object {$_.Productname -eq "Microsoft 365 Business Premium"}).Serviceplansincluded = $SPB02Serviceplansincluded.Replace("$serviceplansincludedReplace","$serviceplansincludedReplaceWith")
+
+
+$serviceplansincludedFriendlynamesReplace = "OFFICE 365 BUSINESS (094e7854-93fc-4d55-b2c0-3ab5369ebdc1)"
+$serviceplansincludedFriendlynamesReplaceWith ="OFFICE 365 BUSINESS WITH SHARED COMPUTER ACTIVATION (Custom-001)"
+
+$SPB02serviceplansincludedFriendlynames = ($htmlTable | Where-Object {$_.Productname -eq "Microsoft 365 Business Premium"})."Serviceplansincluded(friendlynames)"
+($htmlTable | Where-Object {$_.Productname -eq "Microsoft 365 Business Premium"})."Serviceplansincluded(friendlynames)" = $SPB02serviceplansincludedFriendlynames.Replace("$serviceplansincludedFriendlynamesReplace","$serviceplansincludedFriendlynamesReplaceWith")
+
 
 # Export
 
 $htmlTable | Export-Csv -Path .\licensing-service-plan-reference-modifed.csv
 $htmlTable | Export-Excel -Path .\licensing-service-plan-reference-modifed.xlsx
+
