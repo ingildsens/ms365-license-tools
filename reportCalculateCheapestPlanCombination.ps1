@@ -79,13 +79,13 @@ ForEach ($productFound in $productsFound) {
 
 $pieces = 2000
 $microsoft365AppsForAny = $true # Yes, No
-$microsoft365AppsForBusiness = $false # Yes, No
+$microsoft365AppsForBusiness = $false # Yes, No (Beware only Skype for Business Basic client is included)
 $microsoft365AppsForEnterprise = $false # Yes, No
 $microsoft365AppsSharedComputerActivation = $false # hvordan skal dette implemteres?
 $intune = $true # Yes, No
-$ExchangeAny = $true # Yes, No
-$ExchangeOnlinePlan1 = $false # Yes, No
-$ExchangeOnlinePlan2 = $false # Yes, No
+$exchangeAny = $true # Yes, No
+$exchangeOnlinePlan1 = $false # Yes, No
+$exchangeOnlinePlan2 = $false # Yes, No
 $aadP1 = $true # Yes, No
 $aipP1 = $false
 $office365AtpP1 = $false # Yes, No
