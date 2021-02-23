@@ -64,7 +64,7 @@ $pricesFilePath = ".\ms365prices.xlsx"
 $stateFilePath = ".\creatingPricingPowerset_state"
 $licensingServicePlanReferenceFilePath = ".\licensing-service-plan-reference-modifed.csv"
 
-$pricesFilePath = ""
+#$pricesFilePath = ""
 $lastPricesFileHash = ""
 
 If (Test-Path $pricesFilePath) {
